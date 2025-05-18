@@ -10,7 +10,7 @@ import java.util.List;
 public interface StatementService {
     /**
      * Generates a statement from a list of operations.
-     * 
+     *
      * @param operations the list of operations
      * @return the formatted statement
      */

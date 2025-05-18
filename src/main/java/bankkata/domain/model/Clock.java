@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 public interface Clock {
     /**
      * Returns the current date and time with timezone information.
-     * 
+     *
      * @return the current date and time
      */
     ZonedDateTime now();

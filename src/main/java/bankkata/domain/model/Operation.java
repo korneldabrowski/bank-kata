@@ -20,7 +20,7 @@ public class Operation {
 
     /**
      * Returns the date part of the timestamp.
-     * 
+     *
      * @return the date of the operation
      */
     public LocalDate getDate() {

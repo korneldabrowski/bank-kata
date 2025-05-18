@@ -1,6 +1,7 @@
 package bankkata.domain.model;
 
 import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,12 +13,10 @@ import java.util.List;
 public class Account {
     @Getter
     private final AccountId id;
-
-    @Getter
-    private Money balance;
-
     private final List<Operation> operations;
     private final Clock clock;
+    @Getter
+    private Money balance;
 
     public Account(AccountId id, Clock clock) {
         this.id = id;
@@ -28,7 +27,7 @@ public class Account {
 
     /**
      * Deposits money into the account.
-     * 
+     *
      * @param amount the amount to deposit
      * @throws IllegalArgumentException if amount is negative or zero
      */
@@ -41,7 +40,7 @@ public class Account {
 
     /**
      * Withdraws money from the account.
-     * 
+     *
      * @param amount the amount to withdraw
      * @throws IllegalArgumentException if amount is negative or zero, or if there
      *                                  are insufficient funds
@@ -56,7 +55,7 @@ public class Account {
 
     /**
      * Returns an unmodifiable list of all operations performed on the account.
-     * 
+     *
      * @return list of operations
      */
     public List<Operation> getOperations() {

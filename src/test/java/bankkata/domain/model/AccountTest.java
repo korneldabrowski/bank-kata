@@ -1,28 +1,29 @@
 package bankkata.domain.model;
 
+import bankkata.infrastructure.clock.TestClock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import bankkata.infrastructure.clock.TestClock;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for the Account entity.
  */
-public class AccountTest {
+class AccountTest {
 
+    private final AccountId accountId = new AccountId("test123");
     private TestClock clock;
     private Account account;
-    private final AccountId ACCOUNT_ID = new AccountId("test123");
 
     @BeforeEach
     void setUp() {
         clock = new TestClock(LocalDate.of(2025, 5, 19), LocalTime.of(10, 0));
-        account = new Account(ACCOUNT_ID, clock);
+        account = new Account(accountId, clock);
     }
 
     @Test
@@ -82,22 +83,29 @@ public class AccountTest {
 
     @Test
     void shouldThrowExceptionWhenDepositingNegativeAmount() {
+        // Given
+        Money negativeAmount = new Money(-50.0);
+
         // Then
-        assertThrows(IllegalArgumentException.class, () -> account.deposit(new Money(-50.0)));
+        assertThrows(IllegalArgumentException.class, () -> account.deposit(negativeAmount));
     }
 
     @Test
     void shouldThrowExceptionWhenWithdrawingNegativeAmount() {
+        // Given
+        Money negativeAmount = new Money(-50.0);
+
         // Then
-        assertThrows(IllegalArgumentException.class, () -> account.withdraw(new Money(-50.0)));
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(negativeAmount));
     }
 
     @Test
     void shouldThrowExceptionWhenWithdrawingMoreThanBalance() {
         // Given
         account.deposit(new Money(100.0));
+        Money excessiveAmount = new Money(150.0);
 
         // Then
-        assertThrows(IllegalArgumentException.class, () -> account.withdraw(new Money(150.0)));
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(excessiveAmount));
     }
 }

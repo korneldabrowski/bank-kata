@@ -14,7 +14,7 @@ public final class MoneyUtil {
 
     /**
      * Formats a monetary amount with two decimal places.
-     * 
+     *
      * @param amount the amount to format
      * @return a formatted string representation
      */
@@ -24,7 +24,7 @@ public final class MoneyUtil {
 
     /**
      * Formats a monetary amount with two decimal places.
-     * 
+     *
      * @param amount the amount to format
      * @return a formatted string representation
      */
@@ -34,7 +34,7 @@ public final class MoneyUtil {
 
     /**
      * Rounds a monetary amount to two decimal places.
-     * 
+     *
      * @param amount the amount to round
      * @return the rounded amount
      */
@@ -44,7 +44,7 @@ public final class MoneyUtil {
 
     /**
      * Converts a double to a BigDecimal with proper scaling.
-     * 
+     *
      * @param amount the amount to convert
      * @return a BigDecimal representation
      */

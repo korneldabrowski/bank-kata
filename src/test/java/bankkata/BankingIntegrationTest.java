@@ -20,26 +20,23 @@ import static org.junit.jupiter.api.Assertions.*;
  * Integration test for the entire banking application.
  * Tests all layers working together.
  */
-public class BankingIntegrationTest {
+class BankingIntegrationTest {
 
+    private final String accountId = "test123";
     private TestClock clock;
-    private AccountRepository accountRepository;
-    private StatementService statementService;
-    private AccountService accountService;
     private AccountApplicationService applicationService;
-    private final String ACCOUNT_ID = "test123";
 
     @BeforeEach
     void setUp() {
         // Initialize components
         clock = new TestClock(LocalDate.of(2025, 5, 19), LocalTime.of(10, 0));
-        accountRepository = new InMemoryAccountRepository();
-        statementService = new TextStatementFormatter();
-        accountService = new AccountService(accountRepository);
+        AccountRepository accountRepository = new InMemoryAccountRepository();
+        StatementService statementService = new TextStatementFormatter();
+        AccountService accountService = new AccountService(accountRepository);
         applicationService = new AccountApplicationService(accountService, statementService);
 
         // Create test account
-        accountRepository.save(new bankkata.domain.model.Account(new AccountId(ACCOUNT_ID), clock));
+        accountRepository.save(new bankkata.domain.model.Account(new AccountId(accountId), clock));
     }
 
     @Test
@@ -47,22 +44,22 @@ public class BankingIntegrationTest {
         // Given - Account is created in setUp()
 
         // When - Deposit, withdraw and get statement
-        applicationService.deposit(ACCOUNT_ID, 1000.0);
+        applicationService.deposit(accountId, 1000.0);
 
         // Change date for the next operation
         clock.setFixedDate(LocalDate.of(2025, 5, 20));
         clock.setFixedTime(LocalTime.of(14, 30));
-        applicationService.deposit(ACCOUNT_ID, 500.0);
+        applicationService.deposit(accountId, 500.0);
 
         // Change date for the next operation
         clock.setFixedDate(LocalDate.of(2025, 5, 21));
         clock.setFixedTime(LocalTime.of(16, 15));
-        applicationService.withdraw(ACCOUNT_ID, 300.0);
+        applicationService.withdraw(accountId, 300.0);
 
         // Then - Verify results
-        assertEquals(1200.0, applicationService.getBalance(ACCOUNT_ID), 0.001);
+        assertEquals(1200.0, applicationService.getBalance(accountId), 0.001);
 
-        String statement = applicationService.getStatement(ACCOUNT_ID).formattedStatement();
+        String statement = applicationService.getStatement(accountId).formattedStatement();
 
         // Verify statement content
         assertTrue(statement.contains("WITHDRAWAL"));
@@ -82,16 +79,16 @@ public class BankingIntegrationTest {
     @Test
     void shouldHandleExceptionsCorrectly() {
         // Given
-        applicationService.deposit(ACCOUNT_ID, 100.0);
+        applicationService.deposit(accountId, 100.0);
 
         // Then - Verify exception is thrown for invalid operations
         Exception withdrawalException = assertThrows(Exception.class,
-                () -> applicationService.withdraw(ACCOUNT_ID, 200.0));
+                () -> applicationService.withdraw(accountId, 200.0));
         assertTrue(withdrawalException.getMessage().contains("Failed to withdraw") ||
                 withdrawalException.getMessage().contains("Insufficient funds"));
 
         Exception negativeDepositException = assertThrows(Exception.class,
-                () -> applicationService.deposit(ACCOUNT_ID, -50.0));
+                () -> applicationService.deposit(accountId, -50.0));
         assertTrue(negativeDepositException.getMessage().contains("Failed to deposit") ||
                 negativeDepositException.getMessage().contains("positive"));
     }

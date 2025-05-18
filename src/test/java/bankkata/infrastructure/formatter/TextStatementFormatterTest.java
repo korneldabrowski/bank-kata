@@ -1,21 +1,23 @@
 package bankkata.infrastructure.formatter;
 
-import bankkata.domain.model.*;
+import bankkata.domain.model.Money;
+import bankkata.domain.model.Operation;
+import bankkata.domain.model.OperationType;
+import bankkata.infrastructure.clock.TestClock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import bankkata.infrastructure.clock.TestClock;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests for the TextStatementFormatter.
  */
-public class TextStatementFormatterTest {
+class TextStatementFormatterTest {
 
     private TextStatementFormatter formatter;
     private TestClock clock;

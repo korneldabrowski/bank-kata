@@ -13,7 +13,6 @@ import bankkata.domain.service.AccountService;
 import bankkata.domain.service.StatementService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Application service for account operations.
@@ -30,7 +29,7 @@ public class AccountApplicationService {
 
     /**
      * Deposits money into an account.
-     * 
+     *
      * @param accountId the ID of the account
      * @param amount    the amount to deposit
      * @throws ApplicationException if the operation fails
@@ -45,7 +44,7 @@ public class AccountApplicationService {
 
     /**
      * Withdraws money from an account.
-     * 
+     *
      * @param accountId the ID of the account
      * @param amount    the amount to withdraw
      * @throws ApplicationException if the operation fails
@@ -60,7 +59,7 @@ public class AccountApplicationService {
 
     /**
      * Gets the balance of an account.
-     * 
+     *
      * @param accountId the ID of the account
      * @return the account balance
      * @throws ApplicationException if the operation fails
@@ -76,7 +75,7 @@ public class AccountApplicationService {
 
     /**
      * Gets a statement for an account.
-     * 
+     *
      * @param accountId the ID of the account
      * @return the account statement
      * @throws ApplicationException if the operation fails
@@ -93,7 +92,7 @@ public class AccountApplicationService {
                             op.getTimestamp(),
                             op.getAmount().getAmount().doubleValue(),
                             op.getBalanceAfterOperation().getAmount().doubleValue()))
-                    .collect(Collectors.toList());
+                    .toList();
 
             return new StatementDto(formattedStatement, operationDtos);
         } catch (AccountNotFoundException e) {

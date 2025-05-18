@@ -3,6 +3,7 @@ package bankkata.domain.model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

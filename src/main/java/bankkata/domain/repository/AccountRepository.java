@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface AccountRepository {
     /**
      * Finds an account by its ID.
-     * 
+     *
      * @param accountId the account ID
      * @return the account wrapped in an Optional
      */
@@ -19,7 +19,7 @@ public interface AccountRepository {
 
     /**
      * Saves an account to the repository.
-     * 
+     *
      * @param account the account to save
      * @return the saved account
      */

@@ -2,7 +2,6 @@ package bankkata.infrastructure.clock;
 
 import bankkata.domain.model.Clock;
 
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 /**

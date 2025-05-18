@@ -18,7 +18,7 @@ public class AccountService {
 
     /**
      * Deposits money into an account.
-     * 
+     *
      * @param accountId the ID of the account
      * @param amount    the amount to deposit
      * @return the updated account
@@ -32,7 +32,7 @@ public class AccountService {
 
     /**
      * Withdraws money from an account.
-     * 
+     *
      * @param accountId the ID of the account
      * @param amount    the amount to withdraw
      * @return the updated account
@@ -46,7 +46,7 @@ public class AccountService {
 
     /**
      * Gets an account by its ID.
-     * 
+     *
      * @param accountId the ID of the account
      * @return the account
      * @throws AccountNotFoundException if the account is not found

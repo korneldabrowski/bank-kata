@@ -1,8 +1,5 @@
 package bankkata.application.dto;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 import java.time.ZonedDateTime;
 
 /**
